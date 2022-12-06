@@ -6,67 +6,58 @@ var matches = pattern.Matches(Day2.Properties.Resources.input);
 
 #region Part 1
 
-var rounds = ReadGuideAsPlays();
+var part1Rounds = ReadGuideAsPlays();
 
-var results = ScoreRounds(rounds);
+var part1Results = ScoreRounds(part1Rounds);
 
 #endregion
 
 #region Part 2
 
+var part2Rounds = ReadGuideAsPlayAndOutcome();
 
+var part2Results = ScoreRounds(part2Rounds);
 
 #endregion
 
 Console.WriteLine("breakpoint");
 
 #region Support Methods
-List<(Play, Play)> ReadGuideAsPlays()
+List<Round> ReadGuideAsPlays()
 {
-    var rounds = new List<(Play, Play)>();
+    var rounds = new List<Round>();
 
     foreach (Match match in matches)
     {
-        var round = (new Play(match.Groups[1].Value), new Play(match.Groups[2].Value));
+        var round = new Round(Play.GetPlay(match.Groups[1].Value), Play.GetPlay(match.Groups[2].Value));
         rounds.Add(round);
     }
 
     return rounds;
 }
 
-(int player1Score, int player2Score) ScoreRounds(List<(Play play1, Play play2)> rounds)
+List<Round> ReadGuideAsPlayAndOutcome()
+{
+    var rounds = new List<Round>();
+
+    foreach (Match match in matches)
+    {
+        var round = new Round(Play.GetPlay(match.Groups[1].Value), (Round.OutcomeType)match.Groups[2].Value[0]);
+        rounds.Add(round);
+    }
+
+    return rounds;
+}
+
+(int player1Score, int player2Score) ScoreRounds(List<Round> rounds)
 {
     int player1Score = 0;
     int player2Score = 0;
 
     foreach (var round in rounds)
     {
-        var score = ScoreRound(round);
-
-        player1Score += score.player1Score;
-        player2Score += score.player2Score;
-    }
-
-    return (player1Score, player2Score);
-}
-
-(int player1Score, int player2Score) ScoreRound((Play play1, Play play2) round)
-{
-    int player1Score = round.play1.PointValue;
-    int player2Score = round.play2.PointValue;
-
-    if (round.play1 == round.play2)
-    {
-        player1Score += 3;
-        player2Score += 3;
-    }
-    else if (round.play1 > round.play2)
-    {
-        player1Score += 6;
-    }
-    else
-    {
-        player2Score += 6;
+        player1Score += round.Player1Score;
+        player2Score += round.Player2Score;
     }
 
     return (player1Score, player2Score);

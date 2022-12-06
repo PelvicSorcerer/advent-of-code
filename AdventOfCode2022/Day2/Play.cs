@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 
 namespace Day2
 {
-	public class Play
+	public abstract class Play
 	{
 		#region Enums
 
@@ -14,83 +14,46 @@ namespace Day2
 			Scissors = 3
 		}
 
-		#endregion
-
-		#region Constructors
-
-		public Play(string value)
-		{
-			GuideValue = value;
-		}
-
-		#endregion
+        #endregion
 
 		#region Properties
 
 		public int PointValue => (int)Name;
-
-		private string GuideValue { get; }
-
-		public NameType Name => GetName();
+		public NameType Name { get; protected set; }
 
 		#endregion
 
 		#region Public Methods
 
-		#region Comparison Operator Overrides
+		public static Play GetPlay(string value)
+        {
+			var type = GetName(value);
 
-		public static bool operator <(Play p1, Play p2)
-		{
-			if (p1.Name == NameType.Rock && p2.Name == NameType.Scissors)
-			{
-				return false;
-			}
-			else if (p1.Name == NameType.Scissors && p2.Name == NameType.Rock)
-			{
-				return true;
-			}
-			else
-			{
-				return p1.Name < p2.Name;
-			}
-		}
+			switch (type)
+            {
+				case NameType.Rock:
+					return new Rock();
+				case NameType.Paper:
+					return new Paper();
+				case NameType.Scissors:
+                    return new Scissors();
+				default:
+					throw new NotImplementedException();
+            }
+        }
 
-		public static bool operator >(Play p1, Play p2)
-		{
-			if (p1.Name == NameType.Rock && p2.Name == NameType.Scissors)
-			{
-				return true;
-			}
-			else if (p1.Name == NameType.Scissors && p2.Name == NameType.Rock)
-			{
-				return false;
-			}
-			else
-			{
-				return p1.Name > p2.Name;
-			}
-		}
+		public abstract Type Beats();
 
-		public static bool operator ==(Play p1, Play p2)
-		{
-			return p1.Name == p2.Name;
-		}
-
-		public static bool operator !=(Play p1, Play p2)
-		{
-			return p1.Name != p2.Name;
-		}
-
-		#endregion
+		public abstract Type BeatenBy();
 
 		#endregion
 
 		#region Private Methods
 
-		private NameType GetName()
+		private static NameType GetName(string guideValue)
 		{
 			NameType name;
-			switch (GuideValue)
+			switch (guideValue)
 			{
 				case "A":
 				case "X":
