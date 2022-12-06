@@ -82,5 +82,19 @@ namespace Day3.Properties {
                 return ResourceManager.GetString("input", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to vJrwpWtwJgWrhcsFMMfFFhFp
+        ///jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+        ///PmmdzqPrVvPwwTWBwg
+        ///wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+        ///ttgJtRGJQctTZtZT
+        ///CrZsJsPPZsGzwwsLwLmpwMDw
+        /// </summary>
+        internal static string sampleInput {
+            get {
+                return ResourceManager.GetString("sampleInput", resourceCulture);
+            }
+        }
     }
 }
