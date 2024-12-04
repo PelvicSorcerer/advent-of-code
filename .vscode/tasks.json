@@ -7,13 +7,24 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AdventOfCode2024/Day1/Day1.csproj"
+                "${workspaceFolder}/AdventOfCode2024/${input:projectName}"
             ],
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "projectName",
+            "type": "pickString",
+            "description": "Select the project to build",
+            "options": [
+                "Day1",
+                "Day2"
+            ]
         }
     ]
 }

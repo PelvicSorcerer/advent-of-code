@@ -14,6 +14,17 @@
             "cwd": "${workspaceFolder}/AdventOfCode2024/Day1",
             "console": "integratedTerminal",
             "stopAtEntry": false
+        },
+        {
+            "name": "Launch Day2 Project",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/AdventOfCode2024/Day2/bin/Debug/net8.0/Day2.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/AdventOfCode2024/Day2",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
         }
     ]
 }
