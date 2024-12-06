@@ -23,7 +23,8 @@
             "description": "Select the project to build",
             "options": [
                 "Day1",
-                "Day2"
+                "Day2",
+                "Day3"
             ]
         }
     ]
