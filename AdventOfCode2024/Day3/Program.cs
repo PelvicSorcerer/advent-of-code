@@ -12,6 +12,9 @@ namespace Day3
             string input = File.ReadAllText(inputFilePath);
             int result = Part1.CalculateSumOfMultiplications(input);
             Console.WriteLine($"The sum of all valid multiplications is: {result}");
+
+            // Run Part2
+            Console.WriteLine("Part 2 Result: " + Part2.CalculateSum(input));
         }
     }
 }
